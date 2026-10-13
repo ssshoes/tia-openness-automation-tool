@@ -22,9 +22,9 @@ Gotowe wydania i paczki programu znajdziesz w [Releases](https://github.com/sssh
 | --- | --- |
 | Sekwencyjny | Kolejne adresy zależą od rozmiaru danych modułów i kierunku I/Q. |
 | Blokowy co 100 | Sloty 1–9: baza +100, +200… +900. Slot 10 kontynuuje za slotem 9. |
-| Blokowy co 32 | Każdy slot ma zakres 32 bajtów wejść I i 32 bajtów wyjść Q. Początki: baza, baza +32… +288. Puste sloty zachowują swój zakres. |
+| Blokowy co 32 | Sloty 1–9 mają zakres 32 bajtów I i Q: baza, baza +32… +256. Slot 10 zaczyna tuż za danymi slotu 9, według większego rozmiaru I/Q. |
 
-Adres bazowy pochodzi z `StartAddress` w CSV. Przykład dla bazy 1000 w trybie co 32: slot 1 zaczyna I/Q od 1000, slot 2 od 1032, a slot 10 od 1288. Moduł wymagający więcej niż 32 bajtów w jednym kierunku jest pomijany z komunikatem błędu.
+Adres bazowy pochodzi z `StartAddress` w CSV. Przykład dla bazy 1000 w trybie co 32: slot 1 zaczyna I/Q od 1000, slot 2 od 1032, a slot 9 od 1256. Jeśli slot 9 zajmuje 2 bajty I i 1 bajt Q, slot 10 zaczyna od 1258 w obu kierunkach. Moduł wymagający więcej niż 32 bajtów w jednym kierunku jest pomijany z komunikatem błędu.
 
 ## Wymagania do uruchomienia
 
@@ -120,7 +120,7 @@ Tryby adresacji:
 
 - Sekwencyjny: zgodnie z rozmiarem danych modułów.
 - Co 100: sloty 1–9 od bazy +100… +900; slot 10 za danymi slotu 9.
-- Co 32: sloty 1–10 od bazy do bazy +288. Każdy slot rezerwuje 32 bajty I i 32 bajty Q, także pusty. Moduł większy niż 32 bajty w jednym kierunku jest pomijany z błędem w logu.
+- Co 32: sloty 1–9 od bazy do bazy +256, z rezerwacją 32 bajtów I i Q, także dla pustych slotów. Slot 10 zaczyna tuż za rzeczywistymi danymi slotu 9 (większy rozmiar I/Q); jeśli slot 9 jest pusty, zaczyna od bazy slotu 9. Przykład: slot 9 ma I 12900–12901 i Q 12900 → slot 10 zaczyna od 12902 w obu kierunkach. Moduł większy niż 32 bajty w jednym kierunku jest pomijany z błędem w logu.
 
 ### Keyence — CSV → Kamera SR-X1H3HX
 

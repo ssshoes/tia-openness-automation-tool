@@ -2165,10 +2165,12 @@ namespace TIA_Project_v11
                 var modules = GetMasterModules(pepperlDevice);
                 int nextInputAddress = pepperlDevice.StartAddress;
                 int nextOutputAddress = pepperlDevice.StartAddress;
-                int slot10NextAddress = pepperlDevice.StartAddress + 900;
+                int slot10NextAddress = settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot32
+                    ? checked(pepperlDevice.StartAddress + 256)
+                    : pepperlDevice.StartAddress + 900;
                 logger($"Master {pepperlDevice.Name}: StartAddress z CSV {pepperlDevice.StartAddress}");
                 logger(settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot32
-                    ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..10 co 32 bajty I/Q, slot1 od {pepperlDevice.StartAddress}"
+                    ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..9 co 32 bajty I/Q, slot10 za danymi slotu9, slot1 od {pepperlDevice.StartAddress}"
                     : settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice
                     ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..9 co 100, slot10 od {slot10NextAddress}"
                     : $"Master {pepperlDevice.Name}: adresacja sekwencyjna");
@@ -2971,6 +2973,9 @@ namespace TIA_Project_v11
                 if (profile.MaxSize > 32)
                     throw new InvalidOperationException("Moduł przekracza rezerwację 32 bajtów I/Q dla slotu " + slotNumber);
 
+                if (slotNumber == 10)
+                    return slot10NextAddress;
+
                 return checked(masterStartAddress + ((slotNumber - 1) * 32));
             }
 
@@ -3001,7 +3006,11 @@ namespace TIA_Project_v11
             ModuleAddressingProfile profile)
         {
             if (settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot32)
+            {
+                if (slotNumber == 9 || slotNumber == 10)
+                    slot10NextAddress = checked(commonStartAddress + profile.MaxSize);
                 return;
+            }
 
             if (settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice)
             {
@@ -3053,10 +3062,12 @@ namespace TIA_Project_v11
                 var modules = GetMasterModules(pepperlDevice);
                 int nextInputAddress = pepperlDevice.StartAddress;
                 int nextOutputAddress = pepperlDevice.StartAddress;
-                int slot10NextAddress = pepperlDevice.StartAddress + 900;
+                int slot10NextAddress = settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot32
+                    ? checked(pepperlDevice.StartAddress + 256)
+                    : pepperlDevice.StartAddress + 900;
                 logger($"Master {pepperlDevice.Name}: StartAddress z CSV {pepperlDevice.StartAddress}");
                 logger(settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot32
-                    ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..10 co 32 bajty I/Q, slot1 od {pepperlDevice.StartAddress}"
+                    ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..9 co 32 bajty I/Q, slot10 za danymi slotu9, slot1 od {pepperlDevice.StartAddress}"
                     : settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice
                     ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..9 co 100, slot10 od {slot10NextAddress}"
                     : $"Master {pepperlDevice.Name}: adresacja sekwencyjna");
