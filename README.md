@@ -22,9 +22,9 @@ Gotowe wydania i paczki programu znajdziesz w [Releases](https://github.com/sssh
 | --- | --- |
 | Sekwencyjny | Kolejne adresy zależą od rozmiaru danych modułów i kierunku I/Q. |
 | Blokowy co 100 | Sloty 1–9: baza +100, +200… +900. Slot 10 kontynuuje za slotem 9. |
-| Blokowy co 64 | Każdy slot ma zakres 64 bajtów wejść I i 64 bajtów wyjść Q. Początki: baza +64, +128… +640. Puste sloty zachowują swój zakres. |
+| Blokowy co 32 | Każdy slot ma zakres 32 bajtów wejść I i 32 bajtów wyjść Q. Początki: baza, baza +32… +288. Puste sloty zachowują swój zakres. |
 
-Adres bazowy pochodzi z `StartAddress` w CSV. Przykład dla bazy 1000 w trybie co 64: slot 1 zaczyna I/Q od 1064, slot 2 od 1128, a slot 10 od 1640. Moduł wymagający więcej niż 64 bajtów w jednym kierunku jest pomijany z komunikatem błędu.
+Adres bazowy pochodzi z `StartAddress` w CSV. Przykład dla bazy 1000 w trybie co 32: slot 1 zaczyna I/Q od 1000, slot 2 od 1032, a slot 10 od 1288. Moduł wymagający więcej niż 32 bajtów w jednym kierunku jest pomijany z komunikatem błędu.
 
 ## Wymagania do uruchomienia
 
@@ -120,7 +120,7 @@ Tryby adresacji:
 
 - Sekwencyjny: zgodnie z rozmiarem danych modułów.
 - Co 100: sloty 1–9 od bazy +100… +900; slot 10 za danymi slotu 9.
-- Co 64: sloty 1–10 od bazy +64… +640. Każdy slot rezerwuje 64 bajty I i 64 bajty Q, także pusty. Moduł większy niż 64 bajty w jednym kierunku jest pomijany z błędem w logu.
+- Co 32: sloty 1–10 od bazy do bazy +288. Każdy slot rezerwuje 32 bajty I i 32 bajty Q, także pusty. Moduł większy niż 32 bajty w jednym kierunku jest pomijany z błędem w logu.
 
 ### Keyence — CSV → Kamera SR-X1H3HX
 

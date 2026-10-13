@@ -52,7 +52,7 @@ Tryby adresacji:
 
 - Sekwencyjny: zgodnie z rozmiarem danych modułów.
 - Co 100: sloty 1–9 od bazy +100… +900; slot 10 za danymi slotu 9.
-- Co 64: sloty 1–10 od bazy +64… +640. Każdy slot rezerwuje 64 bajty I i 64 bajty Q, także pusty. Moduł większy niż 64 bajty w jednym kierunku jest pomijany z błędem w logu.
+- Co 32: sloty 1–10 od bazy do bazy +288. Każdy slot rezerwuje 32 bajty I i 32 bajty Q, także pusty. Moduł większy niż 32 bajty w jednym kierunku jest pomijany z błędem w logu.
 
 ## Keyence — CSV → Kamera SR-X1H3HX
 
