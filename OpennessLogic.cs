@@ -25,10 +25,10 @@ namespace TIA_Project_v11
         public class PepperlDevice { public string Name { get; set; } public string DeviceName { get; set; } public string Type { get; set; } public string IpAddress { get; set; } public string SubnetName { get; set; } public int ProfinetNumber { get; set; } public string PlcName { get; set; } public string GroupName { get; set; } public int StartAddress { get; set; } public string Slot1Name { get; set; } public string Slot1Type { get; set; } public string Slot2Name { get; set; } public string Slot2Type { get; set; } public string Slot3Name { get; set; } public string Slot3Type { get; set; } public string Slot4Name { get; set; } public string Slot4Type { get; set; } public string Slot5Name { get; set; } public string Slot5Type { get; set; } public string Slot6Name { get; set; } public string Slot6Type { get; set; } public string Slot7Name { get; set; } public string Slot7Type { get; set; } public string Slot8Name { get; set; } public string Slot8Type { get; set; } public string Slot9Name { get; set; } public string Slot9Type { get; set; } public string Slot10Name { get; set; } public string Slot10Type { get; set; } }
         public class KeyenceCameraDevice { public string Name { get; set; } public string DeviceName { get; set; } public string Type { get; set; } public string IpAddress { get; set; } public string SubnetName { get; set; } public int ProfinetNumber { get; set; } public string PlcName { get; set; } public string GroupName { get; set; } public int StartAddress { get; set; } public int InputStartAddress { get; set; } public int OutputStartAddress { get; set; } }
 
-        private const string PepperlGsdType = "GSD:GSDML-V2.35-PEPPERL+FUCHS-ICE38IOL-20250301.XML";
+        private const string PepperlGsdType = "GSD:GSDML-V2.35-PEPPERL+FUCHS-ICE38IOL-AMS-20250201.XML";
         private const string PepperlMasterType = PepperlGsdType + "/DAP/DAP4";
         private const string PepperlEmptyModuleType = PepperlGsdType + "/M/ID_Mod_IOLinkEmpty";
-        private const string PepperlG20ModuleType = PepperlGsdType + "/M/ID_Mod_G20_984067";
+        private const string PepperlG20ModuleType = PepperlGsdType + "/M/ID_Mod_G20_984229";
         private const string KeyenceCameraType = "GSD:GSDML-V2.43-KEYENCE-SR-X1H3H-20240716.XML/DAP/DAP1";
 
         private enum PepperlAddressMode

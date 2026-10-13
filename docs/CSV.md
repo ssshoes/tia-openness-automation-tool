@@ -37,14 +37,14 @@ Puste `Name` lub `DeviceName`, albo wartość `0` w którymś z tych pól kończ
 | Kolumna | Co wpisać |
 | --- | --- |
 | `Name` | Nazwa mastera. `0` kończy listę; wpisz niepustą nazwę. |
-| `Type` | Można pozostawić puste: domyślnie ICE38IOL, `GSD:GSDML-V2.35-PEPPERL+FUCHS-ICE38IOL-20250301.XML/DAP/DAP4`. |
+| `Type` | Można pozostawić puste: domyślnie ICE38IOL, `GSD:GSDML-V2.35-PEPPERL+FUCHS-ICE38IOL-AMS-20250201.XML/DAP/DAP4`. |
 | `IpAddress` | Adres IPv4 mastera. |
 | `SubnetName` | Dokładna nazwa istniejącej podsieci. |
 | `ProfinetNumber` | Numer urządzenia PROFINET. |
 | `PlcName` | Nazwa PLC do wyboru systemu IO; przy braku dopasowania wybierany jest pierwszy system IO. |
 | `StartAddress` | Baza adresów danego mastera. Sposób rozstawienia slotów wybierasz w GUI. |
 | `Slot1Name` … `Slot10Name` | Nazwa modułu w konkretnym slocie. Dla używanego slotu wpisz rzeczywistą nazwę, np. `master01_G20`. Puste lub `0` daje nazwę `NAZWA_MASTERA_n_EMPTY` i powoduje traktowanie slotu jako pustego przy adresacji. |
-| `Slot1Type` … `Slot10Type` | Identyfikator modułu GSDML dla konkretnego slotu. `G20` jest obsługiwanym skrótem. Puste lub `0` tworzy moduł pusty. Dla innych modułów użyj pełnego identyfikatora `/M/...` z właściwego GSDML. |
+| `Slot1Type` … `Slot10Type` | Identyfikator modułu GSDML dla konkretnego slotu. `G20` jest obsługiwanym skrótem dla `GSD:GSDML-V2.35-PEPPERL+FUCHS-ICE38IOL-AMS-20250201.XML/M/ID_Mod_G20_984229`. Puste lub `0` tworzy moduł pusty. Dla innych modułów użyj pełnego identyfikatora `/M/...` z właściwego GSDML. |
 
 Pary pól slotów powtarzają się dla numerów 1–10. Pominięte kolumny slotów są traktowane jak puste. `DeviceName` nie steruje nazwą urządzenia — program tworzy ją jako `Name_DEV` (z możliwą korektą przy kolizji). `GroupName` nie przypisuje mastera do grupy.
 
