@@ -114,7 +114,8 @@ namespace TIA_Project_v11
             cboMasterAddressMode.Items.AddRange(new object[]
             {
                 "Adresacja sekwencyjna",
-                "Adresacja blokowa: sloty +100, slot 10 od +900"
+                "Adresacja blokowa: sloty +100, slot 10 od +900",
+                "Adresacja blokowa: sloty co 64 bajty I i Q"
             });
             cboMasterAddressMode.SelectedIndex = 0;
             AddRow(grid, "Tryb adresacji Master:", cboMasterAddressMode, new Label());
@@ -404,7 +405,9 @@ namespace TIA_Project_v11
                     Log("RUN: CSV Master...");
                     string masterAddressMode = cboMasterAddressMode.SelectedIndex == 1
                         ? "BlockPerDevice"
-                        : "Sequential";
+                        : cboMasterAddressMode.SelectedIndex == 2
+                            ? "BlockPerSlot64"
+                            : "Sequential";
                     if (muProject != null)
                         OpennessLogic.ImportDevicesFromCsv(muProject, csv, "Master", Log, masterAddressMode); // <-- MultiuserProject
                     else

@@ -34,7 +34,8 @@ namespace TIA_Project_v11
         private enum PepperlAddressMode
         {
             Sequential,
-            BlockPerDevice
+            BlockPerDevice,
+            BlockPerSlot64
         }
 
         private enum ModuleIoDirection
@@ -2166,7 +2167,9 @@ namespace TIA_Project_v11
                 int nextOutputAddress = pepperlDevice.StartAddress;
                 int slot10NextAddress = pepperlDevice.StartAddress + 900;
                 logger($"Master {pepperlDevice.Name}: StartAddress z CSV {pepperlDevice.StartAddress}");
-                logger(settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice
+                logger(settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot64
+                    ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..10 co 64 bajty I/Q, slot1 od {pepperlDevice.StartAddress + 64}"
+                    : settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice
                     ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..9 co 100, slot10 od {slot10NextAddress}"
                     : $"Master {pepperlDevice.Name}: adresacja sekwencyjna");
                 for (int i = 0; i < modules.Count; i++)
@@ -2908,6 +2911,9 @@ namespace TIA_Project_v11
             if (string.Equals(mode, "BlockPerDevice", StringComparison.OrdinalIgnoreCase))
                 return PepperlAddressMode.BlockPerDevice;
 
+            if (string.Equals(mode, "BlockPerSlot64", StringComparison.OrdinalIgnoreCase))
+                return PepperlAddressMode.BlockPerSlot64;
+
             return PepperlAddressMode.Sequential;
         }
 
@@ -2960,6 +2966,14 @@ namespace TIA_Project_v11
             if (isEmptyModule)
                 return -1;
 
+            if (settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot64)
+            {
+                if (profile.MaxSize > 64)
+                    throw new InvalidOperationException("Moduł przekracza rezerwację 64 bajtów I/Q dla slotu " + slotNumber);
+
+                return checked(masterStartAddress + (slotNumber * 64));
+            }
+
             if (settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice)
             {
                 if (slotNumber == 10)
@@ -2986,6 +3000,9 @@ namespace TIA_Project_v11
             PepperlAddressingSettings settings,
             ModuleAddressingProfile profile)
         {
+            if (settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot64)
+                return;
+
             if (settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice)
             {
                 if (slotNumber == 9 || slotNumber == 10)
@@ -3038,7 +3055,9 @@ namespace TIA_Project_v11
                 int nextOutputAddress = pepperlDevice.StartAddress;
                 int slot10NextAddress = pepperlDevice.StartAddress + 900;
                 logger($"Master {pepperlDevice.Name}: StartAddress z CSV {pepperlDevice.StartAddress}");
-                logger(settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice
+                logger(settings != null && settings.Mode == PepperlAddressMode.BlockPerSlot64
+                    ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..10 co 64 bajty I/Q, slot1 od {pepperlDevice.StartAddress + 64}"
+                    : settings != null && settings.Mode == PepperlAddressMode.BlockPerDevice
                     ? $"Master {pepperlDevice.Name}: adresacja blokowa slot1..9 co 100, slot10 od {slot10NextAddress}"
                     : $"Master {pepperlDevice.Name}: adresacja sekwencyjna");
 
