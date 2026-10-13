@@ -1,0 +1,2 @@
+Name;Type;IpAddress;SubnetName;ProfinetNumber;PlcName;StartAddress;Slot1Name;Slot1Type;Slot2Name;Slot2Type;Slot3Name;Slot3Type;Slot4Name;Slot4Type;Slot5Name;Slot5Type;Slot6Name;Slot6Type;Slot7Name;Slot7Type;Slot8Name;Slot8Type;Slot9Name;Slot9Type;Slot10Name;Slot10Type
+master01;;192.168.0.121;PN;121;PLC1;3000;master01_G20;G20;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0

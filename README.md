@@ -60,3 +60,7 @@ Przed użyciem opcji PLC Security ustaw lokalnie zmienne środowiskowe:
 - `TIA_OPC_UA_USER_PASSWORD`
 
 Wartości haseł nie są przechowywane w repozytorium.
+
+## Pliki CSV — kolumny i przykłady
+
+Pełne opisy pól dla Lenze, Pepperl, Keyence, Hikvision oraz generatora LAD znajdziesz w [instrukcji CSV](docs/CSV.md). Gotowe pliki do uzupełnienia są w folderze [examples](examples).

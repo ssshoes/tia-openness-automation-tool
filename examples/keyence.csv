@@ -1,0 +1,2 @@
+Name;DeviceName;Type;IpAddress;SubnetName;ProfinetNumber;PlcName;StartAddress
+keyence01;keyence01_DEV;;192.168.0.111;PN;111;PLC1;2000

@@ -1,0 +1,2 @@
+Name;DeviceName;Type;IpAddress;SubnetName;ProfinetNumber;PlcName;StartAddress
+lenze01;lenze01_DEV;UZUPELNIJ_TYPE_Z_KATALOGU_TIA;192.168.0.101;PN;101;PLC1;1000
